@@ -1,40 +1,37 @@
-# api/models.py
-
 from django.db import models
-from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator
-from encrypted_model_fields.fields import EncryptedCharField
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = EncryptedCharField(max_length=15)
-    preferred_border_crossing = models.CharField(max_length=100)
-    notification_threshold = models.IntegerField(default=30)
+class ApiData(models.Model):
+    api_data_id = models.AutoField(primary_key=True)
+    api_key = models.CharField(max_length=255, null=True)
 
-class EasyGoAccount(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    account_number = EncryptedCharField(max_length=20)
-    balance = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+class SystemStatus(models.Model):
+    system_id = models.AutoField(primary_key=True)
+    app_status = models.CharField(max_length=255, null=True)
+    api_status = models.CharField(max_length=255, null=True)
+    cam_status = models.CharField(max_length=255, null=True)
 
-class BorderCrossing(models.Model):
-    name = models.CharField(max_length=100)
-    country = models.CharField(max_length=50)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+class LogTable(models.Model):
+    log_id = models.AutoField(primary_key=True)
+    event_type = models.CharField(max_length=255, null=True)
+    timestamp = models.DateTimeField(null=True)
+    system = models.ForeignKey(SystemStatus, on_delete=models.CASCADE, null=True)
 
-class WaitTime(models.Model):
-    border_crossing = models.ForeignKey(BorderCrossing, on_delete=models.CASCADE)
-    direction = models.CharField(max_length=20)  # 'inbound' or 'outbound'
-    wait_time = models.IntegerField()  # in minutes
-    timestamp = models.DateTimeField(auto_now_add=True)
+class Port(models.Model):
+    port_id = models.AutoField(primary_key=True)
+    port_name = models.CharField(max_length=255, null=True)
+    location = models.CharField(max_length=255, null=True)
+    cam_north_link = models.CharField(max_length=255, null=True)
+    cam_south_link = models.CharField(max_length=255, null=True)
+    out_traffic_level = models.CharField(max_length=50, null=True)
+    in_traffic_level = models.CharField(max_length=50, null=True)
+    lane_us = models.CharField(max_length=255, null=True)
+    lane_status_mex = models.CharField(max_length=255, null=True)
+    us_lane_type = models.CharField(max_length=255, null=True)
 
-class CameraFeed(models.Model):
-    border_crossing = models.ForeignKey(BorderCrossing, on_delete=models.CASCADE)
-    url = models.URLField()
-    last_analyzed = models.DateTimeField(null=True, blank=True)
+class UserSettings(models.Model):
+    user_settings_id = models.AutoField(primary_key=True)
 
-class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)
+class User(models.Model):
+    user_id = models.AutoField(primary_key=True)
+    wtu_data = models.CharField(max_length=255, null=True)
+    user_settings = models.ForeignKey(UserSettings, on_delete=models.CASCADE, null=True)
