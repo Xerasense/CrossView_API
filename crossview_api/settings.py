@@ -4,7 +4,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# For deployment purposes
 SECRET_KEY = 'your-secret-key-here'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -34,7 +34,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'crossview_api.urls'
+# ROOT_URLCONF = 'crossview_api.urls'
 
 TEMPLATES = [
     {
@@ -58,10 +58,11 @@ WSGI_APPLICATION = 'crossview_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crossviewdb',
-        'USER': 'root', #os.environ.get('DB_USER'),
-        'PASSWORD': '12345678', #os.environ.get('DB_PASSWORD'),
-        'HOST': 'localhost',# os.environ.get('DB_HOST'),
+        'NAME': 'crossviewDev',
+        'USER': 'root',  # Your Railway username
+        'PASSWORD': 'YevtpXktQFTwWYzsiuhtmDqDtuHAlXap',  # Your Railway password
+        'HOST': 'junction.proxy.rlwy.net',  # The Railway host
+        'PORT': '50085',  # The Railway port
     }
 }
 
@@ -95,11 +96,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Django REST Framework settings
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ],
 }
+
+ROOT_URLCONF = 'crossview_api.urls'
