@@ -59,7 +59,7 @@ WSGI_APPLICATION = 'crossview_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crossviewDev',
+        'NAME': 'railway',
         'USER': 'root',  # Your Railway username
         'PASSWORD': 'YevtpXktQFTwWYzsiuhtmDqDtuHAlXap',  # Your Railway password
         'HOST': 'junction.proxy.rlwy.net',  # The Railway host
