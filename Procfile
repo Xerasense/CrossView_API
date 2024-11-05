@@ -1,1 +1,1 @@
-web: gunicorn CrossView-API.wsgi --log-file -
+web: gunicorn CrossView_API.wsgi --log-file -

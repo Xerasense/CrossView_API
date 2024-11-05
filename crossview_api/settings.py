@@ -110,4 +110,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-ROOT_URLCONF = 'crossview_api.urls'
+#ROOT_URLCONF = 'crossview_api.urls'
