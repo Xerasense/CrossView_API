@@ -1,4 +1,3 @@
-from rest_framework import viewsets, permissions
 from .models import Port
 from .serializers import PortSerializer
 from rest_framework.viewsets import ModelViewSet
