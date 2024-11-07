@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-#from django import cors
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +10,8 @@ SECRET_KEY = 'your-secret-key-here'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-CORS_ORIGIN_ALLOW_ALL = True
+
+
 
 # Setting to all domains as per railway service
 ALLOWED_HOSTS = ['*']
@@ -24,7 +25,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
-    'corsheaders',
     'rest_framework',
     'api',
 ]
@@ -37,7 +37,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # ROOT_URLCONF = 'crossview_api.urls'
