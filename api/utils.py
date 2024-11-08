@@ -1,19 +1,18 @@
 # api/utils.py
-
-import requests
+# import requests
 from django.conf import settings
 import boto3
 from botocore.exceptions import ClientError
 
-def fetch_cbp_data():
-    url = settings.CBP_API_URL
-    headers = {'X-API-Key': settings.CBP_API_KEY}
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        # Handle error
-        return None
+# def fetch_cbp_data():
+#     url = settings.CBP_API_URL
+#     headers = {'X-API-Key': settings.CBP_API_KEY}
+#     response = requests.get(url, headers=headers)
+#     if response.status_code == 200:
+#         return response.json()
+#     else:
+#         # Handle error
+#         return None
 
 def analyze_camera_feed(feed_url):
     # Implement AI analysis of camera feed

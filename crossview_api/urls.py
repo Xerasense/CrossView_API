@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from api.views import PortViewSet
+from api.views import PortViewSet, TrafficAllowedViewSet
 
 router = DefaultRouter()
 # router.register(r'api-data', ApiDataViewSet)
 # router.register(r'system-status', SystemStatusViewSet)
 # router.register(r'logs', LogTableViewSet)
 router.register('ports', PortViewSet)
+#router.register('ports/port_status', TrafficAllowedViewSet, basename='portstatus')
 # router.register(r'user-settings', UserSettingsViewSet)
 # router.register(r'users', UserViewSet)
 

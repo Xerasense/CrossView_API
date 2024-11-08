@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Port
+from .models import Port, TrafficAllowed
+
 
 # class ApiDataSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -27,10 +28,16 @@ class PortSerializer(serializers.ModelSerializer):
             'cam_south_link',
             'out_traffic_level',
             'in_traffic_level',
-            'lane_us',
-            'lane_status_mex',
-            'us_lane_type',
+            'out_estimated_time',
+            'in_estimated_time',
+            'port_status',
         ]
+
+class TrafficAllowedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrafficAllowed
+        fields = ['port_id', 'commercial', 'passenger', 'pedestrian', 'sentri', 'commer_fast']
+
 
 # class UserSettingsSerializer(serializers.ModelSerializer):
 #     class Meta:

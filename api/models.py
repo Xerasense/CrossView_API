@@ -24,10 +24,20 @@ class Port(models.Model):
     cam_south_link = models.CharField(max_length=255, null=True)
     out_traffic_level = models.CharField(max_length=50, null=True)
     in_traffic_level = models.CharField(max_length=50, null=True)
-    lane_us = models.CharField(max_length=255, null=True)
-    lane_status_mex = models.CharField(max_length=255, null=True)
-    us_lane_type = models.CharField(max_length=255, null=True)
+    out_estimated_time = models.CharField(max_length=50, null=True)
+    in_estimated_time = models.CharField(max_length=50, null=True)
+    #lane_us = models.CharField(max_length=255, null=True)
+    #lane_status_mex = models.CharField(max_length=255, null=True)
+    #us_lane_type = models.CharField(max_length=255, null=True)
+    port_status = models.BooleanField(null=True)
 
+class TrafficAllowed(models.Model):
+    port_id = models.OneToOneField(Port, on_delete=models.CASCADE, primary_key=True)
+    commercial = models.BooleanField(null=True)
+    passenger = models.BooleanField(null=True)
+    pedestrian = models.BooleanField(null=True)
+    sentri = models.BooleanField(null=True)
+    commer_fast = models.BooleanField(null=True)
 # class UserSettings(models.Model):
 #     user_settings_id = models.AutoField(primary_key=True)
 #
