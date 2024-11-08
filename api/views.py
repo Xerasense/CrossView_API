@@ -39,6 +39,42 @@ class PortViewSet(ModelViewSet):
         except TrafficAllowed.DoesNotExist:
             return Response({'error': 'PortStatus not found'}, status=status.HTTP_404_NOT_FOUND)
 
+    @action(detail=False, methods=['put'], url_path='update_status')
+    def update_status(self, request):
+        if not isinstance(request.data, list):
+            return Response({'error': 'Expected a list of objects'}, status=status.HTTP_400_BAD_REQUEST)
+
+        response_data = []
+        for item in request.data:
+            port_id = item.get("port_id")
+            port_status = item.get("port_status")
+
+            if port_id is None or port_status is None:
+                response_data.append({
+                    "port_id": port_id,
+                    "status": "error",
+                    "message": "Missing port_id or port_status"
+                })
+                continue
+
+            try:
+                port = Port.objects.get(port_id=port_id)
+                port.port_status = port_status
+                port.save()
+                response_data.append({
+                    "port_id": port_id,
+                    "status": "updated",
+                    "message": f"Port {port_id} status updated successfully"
+                })
+            except Port.DoesNotExist:
+                response_data.append({
+                    "port_id": port_id,
+                    "status": "error",
+                    "message": "Port not found"
+                })
+
+        return Response(response_data, status=status.HTTP_200_OK)
+
 class TrafficAllowedViewSet(ModelViewSet):
     queryset = TrafficAllowed.objects.all()
     serializer_class = TrafficAllowedSerializer
