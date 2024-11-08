@@ -1,6 +1,7 @@
-from rest_framework import viewsets, permissions
 from .models import Port
 from .serializers import PortSerializer
+from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
 # class ApiDataViewSet(viewsets.ModelViewSet):
 #     queryset = ApiData.objects.all()
 #     serializer_class = ApiDataSerializer
@@ -16,10 +17,12 @@ from .serializers import PortSerializer
 #     serializer_class = LogTableSerializer
 #     permission_classes = [permissions.IsAuthenticated]
 
-class PortViewSet(viewsets.ModelViewSet):
+class PortViewSet(ModelViewSet):
     # Just need to add some filtering capabilities
     queryset = Port.objects.all()
     serializer_class = PortSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['port_id', 'port_name', 'location']
     # permission_classes = [permissions.IsAuthenticated]
 
 # class UserSettingsViewSet(viewsets.ModelViewSet):
